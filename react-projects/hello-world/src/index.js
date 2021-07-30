@@ -3,11 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import LifeCycle from "./components/LifeCycle";
 
 ReactDOM.render(
   <React.StrictMode>
-    <LifeCycle />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

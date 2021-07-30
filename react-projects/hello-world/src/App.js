@@ -1,4 +1,6 @@
+import { useState } from "react";
 import "./App.css";
+import Counter from "./components/Counter";
 import User from "./components/User";
 const friends = [
   { id: 1, name: "ahmet" },
@@ -6,9 +8,11 @@ const friends = [
   { id: 3, name: "ayşe" },
 ];
 function App() {
+  const [isVisible, setIsVisible] = useState(true);
   return (
     <div>
-      <User
+      {/*  //props */}
+      {/*  <User
         name="Doğukan"
         surname="Karasansar"
         age={19}
@@ -18,7 +22,9 @@ function App() {
           title: "İstanbul",
           zip: 34513,
         }}
-      />
+      /> */}
+      {isVisible && <Counter />}
+      <button onClick={() => setIsVisible(!isVisible)}>Toggle</button>
     </div>
   );
 }
