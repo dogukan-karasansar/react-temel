@@ -37,7 +37,7 @@ export default function Form({ contacts, addContact }) {
             value={form.phoneNumber}
           />
         </div>
-        <div>
+        <div className="btn">
           <button>Add</button>
         </div>
       </form>
