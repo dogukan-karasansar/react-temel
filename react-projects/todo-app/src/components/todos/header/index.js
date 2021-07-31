@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 export default function Header({ setFilterText }) {
-  
+
   return (
     <div>
       <header className="header">
@@ -10,7 +10,7 @@ export default function Header({ setFilterText }) {
           <input
             onChange={(e) => setFilterText(e.target.value)}
             className="new-todo"
-            placeholder="Ara..."
+            placeholder="Search..."
             autoFocus
           />
         </form>

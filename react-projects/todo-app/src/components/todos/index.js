@@ -6,15 +6,18 @@ import "./todos.css";
 
 export default function Todos() {
   const [todos, setTodos] = useState([
-    { text: "Learn JavaScript", done: false },
-    { text: "Learn React", done: true },
-    { text: "Have a life!", done: false },
+    { id: 1, text: "Learn JavaScript", done: false },
+    { id: 2, text: "Learn React", done: true },
+    { id: 3, text: "Have a life!", done: false },
   ]);
+  var filter;
+
   useEffect(() => {}, [todos]);
 
   const [filterText, setFilterText] = useState("");
+  const [filterData, setFilterData] = useState("all");
 
-  const filter = todos.filter((item) => {
+  filter = todos.filter((item) => {
     return Object.keys(item).some((key) =>
       item[key]
         .toString()
@@ -23,12 +26,22 @@ export default function Todos() {
     );
   });
 
+  filter = todos.filter((item) => {
+    if (filterData === "all") {
+      return todos;
+    } else if (filterData === "active") {
+      return item.done === false;
+    } else {
+      return item.done === true;
+    }
+  });
+
   return (
     <div>
       <section className="todoApp">
         <Header setFilterText={setFilterText} />
         <List todos={filter} setTodos={setTodos} />
-        <Footer />
+        <Footer todos={filter} setTodos={setTodos} filterData={filterData} setFilterData={setFilterData} />
       </section>
     </div>
   );

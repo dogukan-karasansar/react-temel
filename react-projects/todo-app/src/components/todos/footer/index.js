@@ -1,26 +1,47 @@
 import React from "react";
 
-export default function Footer() {
+export default function Footer({ todos, setTodos, filterData, setFilterData }) {
+  const allCompleted = () => {
+    const newTodos = [];
+    setTodos(newTodos);
+  };
   return (
     <div>
       <footer className="footer">
         <span className="todo-count">
-          <strong>2</strong>
-          items left
+          <strong>{todos.length} </strong>
+          items
         </span>
 
         <ul className="filters">
           <li>
-            <a className="selected">All</a>
+            <a
+              onClick={() => setFilterData("all")}
+              className={filterData === "all" ? "selected" : null}
+            >
+              All
+            </a>
           </li>
           <li>
-            <a>Active</a>
+            <a
+              onClick={() => setFilterData("active")}
+              className={filterData === "active" ? "selected" : null}
+            >
+              Active
+            </a>
           </li>
           <li>
-            <a>Completed</a>
+            <a
+              onClick={() => setFilterData("completed")}
+              className={filterData === "completed" ? "selected" : null}
+            >
+              Completed
+            </a>
           </li>
         </ul>
-        <button className="clear-completed">Clear completed</button>
+        <button onClick={() => allCompleted()} className="clear-completed">
+          Clear completed
+        </button>
       </footer>
     </div>
   );

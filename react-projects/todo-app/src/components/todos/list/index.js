@@ -19,14 +19,14 @@ export default function List({ todos, setTodos }) {
 
         <ul className="todo-list">
           {/* List */}
-          {todos.map((todo, i) => (
-            <li key={i} className={todo.done ? "completed" : ""}>
+          {todos.map((todo, index) => (
+            <li key={index} className={todo.done ? "completed" : ""}>
               <div className="view">
                 <input
                   className="toggle"
                   type="checkbox"
                   defaultChecked={todo.done}
-                  onChange={() => checkTodo(i, todo)}
+                  onChange={() => checkTodo(index, todo)}
                 />
                 <label>{todo.text}</label>
                 <button
