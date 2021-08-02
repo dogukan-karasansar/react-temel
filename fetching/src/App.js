@@ -23,15 +23,9 @@ function App() {
         {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/about" component={About}>
-            <About />
-          </Route>
-          <Route path="/users" component={Users}>
-            <Users />
-          </Route>
-          <Route path="/" component={Home}>
-            <Home />
-          </Route>
+          <Route path="/" exact component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/users" component={Users} />
         </Switch>
       </div>
     </Router>
@@ -45,6 +39,5 @@ function Home() {
 function About() {
   return <h2>About</h2>;
 }
-
 
 export default App;
