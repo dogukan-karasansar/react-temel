@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Users from "./components/users";
+import User from "./components/user";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
           <Route path="/users" component={Users} />
+          <Route path="/user/:id" component={User} />
         </Switch>
       </div>
     </Router>
