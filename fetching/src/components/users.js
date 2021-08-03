@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
-import { Switch } from "react-router-dom";
+import { NavLink, Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
 import User from "./user";
 
@@ -22,7 +22,12 @@ export default function Users() {
       {isLoading && <div>Loading...</div>}
       {users.map((user) => (
         <div key={user.id}>
-          <Link to={`${url}/${user.id}`}>{user.name}</Link>
+          <NavLink
+            activeStyle={{ backgroundColor: "blue" }}
+            to={`${url}/${user.id}`}
+          >
+            {user.name}
+          </NavLink>
         </div>
       ))}
       <Switch>

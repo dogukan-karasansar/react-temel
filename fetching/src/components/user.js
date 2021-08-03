@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, NavLink, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 
 export default function User() {
@@ -20,7 +20,7 @@ export default function User() {
       <p>Detail</p>
       <h5>{id}</h5>
       <h5>{user.username}</h5>
-      <Link to={`/users/${parseInt(id) + 1}`}>Next User</Link>
+      <NavLink to={`/users/${parseInt(id) + 1}`}>Next User</NavLink>
     </div>
   );
 }

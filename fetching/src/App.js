@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+} from "react-router-dom";
 import Users from "./components/users";
 
 function App() {
@@ -9,13 +14,19 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <NavLink exact activeStyle={{ backgroundColor: "black" }} to="/">
+                Home
+              </NavLink>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <NavLink activeStyle={{ backgroundColor: "black" }} to="/about">
+                About
+              </NavLink>
             </li>
             <li>
-              <Link to="/users">Users</Link>
+              <NavLink activeStyle={{ backgroundColor: "black" }} to="/users">
+                Users
+              </NavLink>
             </li>
           </ul>
         </nav>
@@ -23,7 +34,7 @@ function App() {
         {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/users" component={Users} />
         </Switch>
