@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
+import {useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
 import { NavLink, Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
 import User from "./user";
