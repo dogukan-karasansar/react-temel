@@ -1,19 +1,21 @@
 import { useFormik } from "formik";
 import React from "react";
-import validations from "./Validation";
+import validationSchema from "./Validation";
 
 export default function SignUp() {
-    const { handleChange, handleSubmit, values } = useFormik({
-        initialValues: {
-          email: "",
-          password: "",
-          passwordConfirm: "",
-        },
-        onSubmit: (values) => {
-          console.log(values);
-        },
-        validationSchema: validations
-      });
+  const { handleChange, handleSubmit, handleBlur, values, errors, touched } =
+    useFormik({
+      initialValues: {
+        email: "",
+        password: "",
+        passwordConfirm: "",
+      },
+      onSubmit: (values) => {
+        console.log(values);
+      },
+      validationSchema,
+    });
+
   return (
     <div>
       <h1>Sign Up</h1>
@@ -28,7 +30,12 @@ export default function SignUp() {
           type="email"
           onChange={handleChange}
           value={values.email}
+          onBlur={handleBlur}
         />
+
+        {errors.email && touched.email && (
+          <div style={{ color: "red" }}>{errors.email}</div>
+        )}
 
         <br></br>
         <label htmlFor="email">Password</label>
@@ -38,7 +45,11 @@ export default function SignUp() {
           type="password"
           onChange={handleChange}
           value={values.password}
+          onBlur={handleBlur}
         />
+        {errors.password && touched.password && (
+          <div style={{ color: "red" }}>{errors.password}</div>
+        )}
         <br></br>
         <label htmlFor="email">Password Confirm</label>
         <input
@@ -46,8 +57,12 @@ export default function SignUp() {
           name="passwordConfirm"
           type="password"
           onChange={handleChange}
+          onBlur={handleBlur}
           value={values.passwordConfirm}
         />
+        {errors.passwordConfirm && touched.passwordConfirm && (
+          <div style={{ color: "red" }}>{errors.passwordConfirm}</div>
+        )}
         <br></br>
         <button type="submit">Submit</button>
         <br></br>
