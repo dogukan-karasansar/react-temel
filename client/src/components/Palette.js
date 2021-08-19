@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { send } from "../SocketApi";
 
-export default function Palette() {
+export default function Palette({activeColor}) {
   const [color, setColor] = useState("#000");
   return (
     <div className="palette">
       <input
         type="color"
         onChange={(e) => setColor(e.target.value)}
-        value={color}
+        value={activeColor}
       />
       <button onClick={() => send(color)}>Click</button>
       {color}
