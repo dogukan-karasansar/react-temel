@@ -3,16 +3,18 @@ import { IntlProvider, FormattedMessage } from "react-intl";
 import "./App.css";
 
 function App() {
-  const defaultLocale = localStorage.getItem("localKey") ?  localStorage.getItem("localKey") :  navigator.language;
+  const defaultLocale = localStorage.getItem("localKey")
+    ? localStorage.getItem("localKey")
+    : navigator.language;
   console.log(defaultLocale);
   const messages = {
     "tr-TR": {
       title: "Merhaba Dünya",
-      description: "yeni mesajlarınız geldi",
+      description: "{count} yeni mesajlarınız geldi",
     },
     "en-US": {
       title: "Hello World",
-      description: "you have new messages",
+      description: "{count} you have new messages",
     },
   };
   const [locale, setLocale] = useState(defaultLocale);
@@ -24,7 +26,7 @@ function App() {
       <IntlProvider messages={messages[locale]}>
         <FormattedMessage id="title" />
         <br />
-        <FormattedMessage id="description" />
+        <FormattedMessage id="description" values={{ count: 3 }}/>
         <br />
         <br />
         <button onClick={() => setLocale("tr-TR")}>TR</button>
