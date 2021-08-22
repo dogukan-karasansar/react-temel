@@ -3,5 +3,13 @@ import userEvent from "@testing-library/user-event";
 import Header from "./Header";
 
 describe("header success render", () => {
-  render(<Header />);
+  let header;
+  beforeEach(() => {
+    render(<Header />);
+    header = screen.getByText("Emoji Search");
+  });
+
+  test("header control", () => {
+    expect(header)
+  });
 });
