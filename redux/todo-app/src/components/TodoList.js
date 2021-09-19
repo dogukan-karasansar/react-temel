@@ -1,10 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggle } from "../redux/todos";
+import { toggle, destroy } from "../redux/todos";
 
 export default function TodoList() {
   const items = useSelector((state) => state.todos.items);
   const dispatch = useDispatch();
+
+  const handleDestroy = (id) => {
+    if (window.confirm("Silmek İstedipinize eminmisiniz?")) {
+      dispatch(destroy(id));
+    }
+  };
 
   return (
     <ul className="todo-list">
@@ -26,7 +32,10 @@ export default function TodoList() {
               type="checkbox"
             />
             <label>{item.title}</label>
-            <button className="destroy"></button>
+            <button
+              onClick={() => handleDestroy(item.id)}
+              className="destroy"
+            ></button>
           </div>
         </li>
       ))}
