@@ -1,12 +1,16 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { changeActiveFilter, clearCompleted } from "../redux/todos";
-
+import {
+  changeActiveFilter,
+  clearCompleted,
+  selectTodos,
+} from "../redux/todos";
+import { selectActiveFilter } from "../redux/todos/index";
 
 export default function ContentFooter() {
-  const items = useSelector((state) => state.todos.items);
+  const items = useSelector(selectTodos);
   const itemsLeft = items.filter((item) => !item.completed).length;
-  const activeFilter = useSelector((state) => state.todos.activeFilter);
+  const activeFilter = useSelector(selectActiveFilter);
   const dispatch = useDispatch();
 
   return (
@@ -45,7 +49,12 @@ export default function ContentFooter() {
         </li>
       </ul>
 
-      <button className="clear-completed" onClick={() => dispatch(clearCompleted())}>Clear completed</button>
+      <button
+        className="clear-completed"
+        onClick={() => dispatch(clearCompleted())}
+      >
+        Clear completed
+      </button>
     </footer>
   );
 }
