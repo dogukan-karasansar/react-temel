@@ -1,4 +1,3 @@
-import { nanoid } from "@reduxjs/toolkit";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../redux/todos";
@@ -12,7 +11,7 @@ export default function Form() {
       return;
     }
     e.preventDefault();
-    dispatch(addTodo({ id: nanoid(), title: title, completed: false }));
+    dispatch(addTodo({ title: title }));
     setTitle("");
   };
   return (
