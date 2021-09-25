@@ -1,30 +1,35 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { nanoid } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
+export const getTodoAsync = createAsyncThunk(
+  "todos/getTodoAsync/",
+  async () => {
+    const response = await axios(`${process.env.REACT_APP_API_BASE_ENDPOINT}/todos`);
+    return response.data;
+  }
+);
+
+export const addTodoAsync = createAsyncThunk(
+  "todos/addTodoAsync",
+  async (data) => {
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_BASE_ENDPOINT}/todos`,
+      data
+    );
+    return response.data;
+  }
+);
 export const todosSlice = createSlice({
   name: "todos",
   initialState: {
-    items: [
-      { id: 1, title: "learn react", completed: true },
-      { id: 2, title: "react hook", completed: false },
-    ],
+    items: [],
     activeFilter: "all",
+    isLoading: false,
+    error: "",
+    addTodoLoading: false,
+    addNewTodoError: "",
   },
   reducers: {
-    addTodo: {
-      reducer: (state, action) => {
-        state.items.push(action.payload);
-      },
-      prepare: ({title}) => {
-        return {
-          payload: {
-            id: nanoid(),
-            completed: false,
-            title
-          },
-        };
-      },
-    },
     toggle: (state, action) => {
       const id = action.payload;
       const item = state.items.find((item) => item.id === id);
@@ -41,6 +46,32 @@ export const todosSlice = createSlice({
     clearCompleted: (state) => {
       const filter = state.items.filter((item) => item.completed === false);
       state.items = filter;
+    },
+  },
+  extraReducers: {
+    //get todos
+    [getTodoAsync.pending]: (state, action) => {
+      state.isLoading = true;
+    },
+    [getTodoAsync.fulfilled]: (state, action) => {
+      state.items = action.payload;
+      state.isLoading = false;
+    },
+    [getTodoAsync.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    },
+    //add todo
+    [addTodoAsync.fulfilled]: (state, action) => {
+      state.items.push(action.payload);
+      state.addTodoLoading = false;
+    },
+    [addTodoAsync.pending]: (state, action) => {
+      state.addTodoLoading = true;
+    },
+    [addTodoAsync.rejected]: (state, action) => {
+      state.addTodoLoading = false;
+      state.addNewTodoError = action.error.message;
     },
   },
 });
@@ -60,6 +91,6 @@ export const selectFilteredTodos = (state) => {
       : todo.completed === true
   );
 };
-export const { addTodo, toggle, destroy, changeActiveFilter, clearCompleted } =
+export const { toggle, destroy, changeActiveFilter, clearCompleted } =
   todosSlice.actions;
 export default todosSlice.reducer;

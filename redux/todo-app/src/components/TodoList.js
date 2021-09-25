@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggle, destroy } from "../redux/todos";
-import { selectFilteredTodos } from "../redux/todos/index";
+import {
+  toggle,
+  destroy,
+  selectFilteredTodos,
+  getTodoAsync,
+} from "../redux/todos";
+import Loading from "./Loading";
+import Error from "./Error";
 
 export default function TodoList() {
   const dispatch = useDispatch();
   const filteredItems = useSelector(selectFilteredTodos);
+  const isLoading = useSelector((state) => state.todos.isLoading);
+  const error = useSelector((state) => state.todos.error);
 
   const handleDestroy = (id) => {
     if (window.confirm("Silmek İstedipinize eminmisiniz?")) {
@@ -13,6 +21,17 @@ export default function TodoList() {
     }
   };
 
+  useEffect(() => {
+    dispatch(getTodoAsync());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error message={error} />;
+  }
 
   return (
     <ul className="todo-list">
