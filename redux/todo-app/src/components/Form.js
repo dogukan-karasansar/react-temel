@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodoAsync } from "../redux/todos";
 import Loading from "./Loading";
 import Error from "./Error";
+import { addTodoAsync } from '../redux/todos/services';
 
 export default function Form() {
   const [title, setTitle] = useState("");
